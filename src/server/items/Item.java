@@ -1,4 +1,4 @@
 package server.items;
 
-public class Item {
+public abstract class Item {
 }

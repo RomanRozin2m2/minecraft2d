@@ -1,4 +1,4 @@
 package server.entities;
 
-public class Entity {
+public abstract class Entity {
 }

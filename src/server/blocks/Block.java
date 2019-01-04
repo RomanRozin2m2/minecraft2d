@@ -1,4 +1,13 @@
 package server.blocks;
 
-public class Block {
+import java.awt.*;
+
+public abstract class Block {
+
+    public Block(){
+
+    }
+
+    public abstract Color getColor();
+    public abstract String getId();
 }
