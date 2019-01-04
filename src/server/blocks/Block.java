@@ -10,4 +10,8 @@ public abstract class Block {
 
     public abstract Color getColor();
     public abstract String getId();
+
+    public boolean isPassable() {
+        return false;
+    }
 }
