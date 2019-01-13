@@ -1,6 +1,7 @@
 package client.gui;
 
 import server.Server;
+import server.Settings;
 import server.blocks.*;
 import server.entities.Player;
 
@@ -23,6 +24,19 @@ public class GameGUI extends JFrame {
         setSize(300, 300);
         initGUI();
         setVisible(true);
+
+        new Thread(() -> {
+            while (true) {
+                try {
+                    int sleepTime = 1000 / Settings.get().ticksPerSecond;
+                    Thread.sleep(sleepTime);
+                    System.out.println(123);
+                    repaint();
+                }
+                catch (InterruptedException e) {}
+            }
+
+        }).start();
     }
 
     private void initGUI() {
