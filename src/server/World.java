@@ -17,7 +17,7 @@ public class World {
         players = new ArrayList<>();
         world = new Block[x_size][y_size];
         random = new Random();
-        simpleGenerate();
+        simpleGenerate2();
     }
 
     private void simpleGenerate(){
@@ -52,6 +52,29 @@ public class World {
                     else {
                         world[x][y] = new Stone();
                     }
+                }
+            }
+        }
+    }
+
+    private void simpleGenerate2(){
+        int currHeight = world[0].length/2;
+        for (int x = 0; x < world.length; x++) {
+            switch (random.nextInt(5)) {
+                case 0: currHeight--; break;
+                case 1: currHeight++; break;
+                default: break;
+            }
+            for (int y = world[x].length - 1; y > currHeight; y--) {
+                world[x][y] = new Air();
+            }
+            world[x][currHeight] = new Grass();
+            for (int y = currHeight - 1; y >= 0; y--) {
+                if (random.nextInt(world[0].length-y) < y){
+                    world[x][y] = new Dirt();
+                }
+                else {
+                    world[x][y] = new Stone();
                 }
             }
         }
