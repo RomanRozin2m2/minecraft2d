@@ -6,6 +6,7 @@ import server.entities.Player;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class GameField extends JComponent {
     int blockSize;
@@ -14,6 +15,10 @@ public class GameField extends JComponent {
     public void paint(Graphics g){
         showWorld(g);
         drawPlayer(g);
+    }
+
+    public List<Player> getPlayer(){
+        return guiWorld.getPlayers();
     }
 
     public GameField(int lineWidth, int lineHeight, World world, int blockSize){ // todo: move blockSize to settings

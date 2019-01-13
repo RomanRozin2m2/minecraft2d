@@ -3,6 +3,7 @@ package server;
 import server.blocks.*;
 import server.entities.Player;
 
+import java.lang.management.PlatformLoggingMXBean;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -17,7 +18,6 @@ public class World {
         world = new Block[x_size][y_size];
         random = new Random();
         simpleGenerate();
-        addPlayer();
     }
 
     private void simpleGenerate(){
@@ -57,7 +57,7 @@ public class World {
         }
     }
 
-    private void addPlayer(){
+    public Player addPlayer(){
         Random random = new Random();
         for (int x = 0; x < world.length; x++) {
             for (int y = world[x].length-2; y > 0; y--) {
@@ -65,21 +65,21 @@ public class World {
                         world[x][y].getId().equals(Air.id) &&
                         world[x][y-1].getId().equals(Grass.id)){
                     if (x == world.length-1){
-                        summonPlayer(x,y);
-                        return;
+                        return summonPlayer(x,y);
                     }
                     else if (random.nextInt(16) == 1){
-                        summonPlayer(x,y);
-                        return;
+                        return summonPlayer(x,y);
                     }
                 }
             }
         }
+        return null;
     }
 
-    private void summonPlayer(int x, int y){
+    private Player summonPlayer(int x, int y){
         Player player = new Player(x,y);
         players.add(player);
+        return player;
     }
 
     public Block[][] getWorld(){
