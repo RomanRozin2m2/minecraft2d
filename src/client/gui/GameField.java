@@ -2,6 +2,7 @@ package client.gui;
 
 import server.World;
 import server.blocks.Block;
+import server.entities.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +13,7 @@ public class GameField extends JComponent {
 
     public void paint(Graphics g){
         showWorld(g);
+        drawPlayer(g);
     }
 
     public GameField(int lineWidth, int lineHeight, World world, int blockSize){ // todo: move blockSize to settings
@@ -19,6 +21,22 @@ public class GameField extends JComponent {
         guiWorld = world;
         setVisible(true);
         this.blockSize = blockSize;
+    }
+
+    private void drawPlayer(Graphics g){
+        g.setColor(Color.BLACK);
+        for (int i = 0; i < guiWorld.getPlayers().toArray().length; i++) {
+
+            Player player = guiWorld.getPlayers().get(i);
+
+            int topLeftX = (int) (player.getX() * blockSize);
+            int topLeftY =  getHeight() - (int) (player.getY() * blockSize + blockSize * player.getHeight());
+
+            int width = (int) (player.getWidth()*blockSize);
+            int height = (int) (player.getHeight()*blockSize);
+
+            g.fillRect(topLeftX, topLeftY, width, height);
+        }
     }
 
     private void showWorld(Graphics g){
