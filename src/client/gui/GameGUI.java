@@ -1,7 +1,7 @@
 package client.gui;
 
+import client.Settings;
 import server.Server;
-import server.Constants;
 import server.blocks.*;
 import server.entities.Player;
 
@@ -26,7 +26,7 @@ public class GameGUI extends JFrame {
         new Thread(() -> {
             while (true) {
                 try {
-                    int sleepTime = 1000 / Constants.get().ticksPerSecond;
+                    int sleepTime = 1000 / Settings.get().framesPerSecond;
                     Thread.sleep(sleepTime);
                     repaint();
                 }
@@ -37,7 +37,7 @@ public class GameGUI extends JFrame {
     }
 
     private void initGUI() {
-        field = new GameField(8, 8, server.getWorld(), 10);
+        field = new GameField(8, 8, server.getWorld());
         add(field);
         kl = new KListener(player);
         addKeyListener(kl);

@@ -12,4 +12,6 @@ public class Settings {
         return obj;
     }
 
+    public int blockSize = 10;
+    public int framesPerSecond = 25;
 }
