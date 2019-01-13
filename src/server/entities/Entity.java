@@ -8,42 +8,14 @@ public abstract class Entity {
     float xSpeed;
     float width;
     float height;
-    float maxRightWalkSpeed;
-    float maxRightRunSpeed;
-    float maxLeftWalkSpeed;
-    float maxLeftRunSpeed;
 
-    public float getMaxRightWalkSpeed() {
-        return maxRightWalkSpeed;
-    }
-
-    public void setMaxRightWalkSpeed(float maxRightWalkSpeed) {
-        this.maxRightWalkSpeed = maxRightWalkSpeed;
-    }
-
-    public float getMaxRightRunSpeed() {
-        return maxRightRunSpeed;
-    }
-
-    public void setMaxRightRunSpeed(float maxRightRunSpeed) {
-        this.maxRightRunSpeed = maxRightRunSpeed;
-    }
-
-    public float getMaxLeftWalkSpeed() {
-        return maxLeftWalkSpeed;
-    }
-
-    public void setMaxLeftWalkSpeed(float maxLeftWalkSpeed) {
-        this.maxLeftWalkSpeed = maxLeftWalkSpeed;
-    }
-
-    public float getMaxLeftRunSpeed() {
-        return maxLeftRunSpeed;
-    }
-
-    public void setMaxLeftRunSpeed(float maxLeftRunSpeed) {
-        this.maxLeftRunSpeed = maxLeftRunSpeed;
-    }
+    static float maxLeftRunSpeed = -0.25f;
+    static float maxLeftWalkSpeed = -0.1f;
+    static float maxRightWalkSpeed = 0.1f;
+    static float maxRightRunSpeed = 0.25f;
+    static float jumpAcceleration = 0.3f;
+    static float runAcceleration = 0.025f;
+    static float walkAcceleration = 0.01f;
 
     public float getWidth() {
         return width;

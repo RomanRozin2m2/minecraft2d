@@ -5,17 +5,13 @@ import server.Settings;
 public class Player extends Entity {
 
     public Player(float spawnx, float spawny){
-        health = Settings.get().playerHealth;
-        xSpeed = 0;
-        ySpeed = 0;
         x = spawnx;
         y = spawny;
+        xSpeed = 0;
+        ySpeed = 0;
+        health = Settings.get().playerHealth;
         height = Settings.get().playerHeight;
         width = Settings.get().playerWidth;
-        maxLeftWalkSpeed = Settings.get().maxLeftWalkSpeed;
-        maxLeftRunSpeed = Settings.get().maxLeftRunSpeed;
-        maxRightWalkSpeed = Settings.get().maxRightWalkSpeed;
-        maxRightRunSpeed = Settings.get().maxRightRunSpeed;
     }
 
     public void walkRight(){
@@ -24,7 +20,7 @@ public class Player extends Entity {
                 xSpeed = maxRightWalkSpeed;
             }
             else {
-                xSpeed += Settings.get().walkAcceleration;
+                xSpeed += walkAcceleration;
             }
         }
     }
@@ -35,7 +31,7 @@ public class Player extends Entity {
                 xSpeed = maxLeftWalkSpeed;
             }
             else {
-                xSpeed -= Settings.get().walkAcceleration;
+                xSpeed -= walkAcceleration;
             }
         }
     }
@@ -46,7 +42,7 @@ public class Player extends Entity {
                 xSpeed = maxRightRunSpeed;
             }
             else {
-                xSpeed += Settings.get().walkAcceleration;
+                xSpeed += walkAcceleration;
             }
         }
     }
@@ -57,11 +53,9 @@ public class Player extends Entity {
                 xSpeed = maxLeftRunSpeed;
             }
             else {
-                xSpeed -= Settings.get().walkAcceleration;
+                xSpeed -= walkAcceleration;
             }
         }
     }
-
-
 
 }
