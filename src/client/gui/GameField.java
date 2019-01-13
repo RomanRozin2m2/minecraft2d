@@ -30,9 +30,7 @@ public class GameField extends JComponent {
 
     private void drawPlayer(Graphics g){
         g.setColor(Color.BLACK);
-        for (int i = 0; i < guiWorld.getPlayers().toArray().length; i++) {
-
-            Player player = guiWorld.getPlayers().get(i);
+        for (Player player: guiWorld.getPlayers()) {
 
             int topLeftX = (int) (player.getX() * blockSize);
             int topLeftY =  getHeight() - (int) (player.getY() * blockSize + blockSize * player.getHeight());
