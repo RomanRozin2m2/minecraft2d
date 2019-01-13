@@ -39,6 +39,7 @@ public class GameField extends JComponent {
 
     private void showWorld(Graphics g){
         int blockSize = Settings.get().blockSize;
+        boolean useTextures = Settings.get().renderMode == RenderMode.Textures;
         for (int x = 0; x < guiWorld.getWorld().length; x++){
             for (int y = 0; y < guiWorld.getWorld()[x].length; y++){
                 Block block = guiWorld.getWorld()[x][y];
@@ -46,7 +47,7 @@ public class GameField extends JComponent {
                 int topLeftX = x * blockSize;
                 int topLeftY = getHeight()-(y+1) * blockSize;
 
-                if (block.hasTexture()) {
+                if (block.hasTexture() && useTextures) {
                     g.drawImage(block.getTexture(), topLeftX, topLeftY, blockSize, blockSize, this);
                 }
                 else {

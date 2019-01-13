@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Bedrock extends Block {
 
-    public final static Color color = new Color(0x653200);
+    public final static Color color = new Color(0x181818);
     public final static String id = "bedrock";
     public final static Image texture = getTextureImage("data/textures/bedrock.png");
 
