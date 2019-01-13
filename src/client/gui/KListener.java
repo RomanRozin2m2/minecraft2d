@@ -21,11 +21,9 @@ public class KListener implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_A){
             player.walkLeft();
-            System.out.println("A" + player.getxSpeed());
         }
         else if (e.getKeyCode() == KeyEvent.VK_D){
             player.walkRight();
-            System.out.println("D" + player.getxSpeed());
         }
     }
 

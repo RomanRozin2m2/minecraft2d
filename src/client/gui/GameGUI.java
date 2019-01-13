@@ -30,7 +30,6 @@ public class GameGUI extends JFrame {
                 try {
                     int sleepTime = 1000 / Settings.get().ticksPerSecond;
                     Thread.sleep(sleepTime);
-                    System.out.println(123);
                     repaint();
                 }
                 catch (InterruptedException e) {}
