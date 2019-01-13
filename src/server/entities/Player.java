@@ -1,6 +1,6 @@
 package server.entities;
 
-import server.Settings;
+import server.Constants;
 
 public class Player extends Entity {
 
@@ -9,9 +9,9 @@ public class Player extends Entity {
         y = spawny;
         xSpeed = 0;
         ySpeed = 0;
-        health = Settings.get().playerHealth;
-        height = Settings.get().playerHeight;
-        width = Settings.get().playerWidth;
+        health = Constants.get().playerHealth;
+        height = Constants.get().playerHeight;
+        width = Constants.get().playerWidth;
     }
 
     public void walkRight(){

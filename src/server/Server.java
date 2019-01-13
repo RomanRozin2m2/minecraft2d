@@ -16,7 +16,7 @@ public class Server {
     private void handleServer() {
         while (true) {
             try {
-                int sleepTime = 1000 / Settings.get().ticksPerSecond;
+                int sleepTime = 1000 / Constants.get().ticksPerSecond;
                 Thread.sleep(sleepTime);
             }
             catch (InterruptedException e) {}

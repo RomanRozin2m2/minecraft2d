@@ -1,13 +1,11 @@
 package client.gui;
 
 import server.Server;
-import server.Settings;
+import server.Constants;
 import server.blocks.*;
 import server.entities.Player;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.KeyListener;
 
 public class GameGUI extends JFrame {
     Block[][] guiWorld;
@@ -28,7 +26,7 @@ public class GameGUI extends JFrame {
         new Thread(() -> {
             while (true) {
                 try {
-                    int sleepTime = 1000 / Settings.get().ticksPerSecond;
+                    int sleepTime = 1000 / Constants.get().ticksPerSecond;
                     Thread.sleep(sleepTime);
                     repaint();
                 }

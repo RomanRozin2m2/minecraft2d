@@ -1,14 +1,14 @@
 package server;
 
-public class Settings {
+public class Constants {
 
-    private static Settings obj = new Settings();
+    private static Constants obj = new Constants();
 
-    private Settings(){
+    private Constants(){
 
     }
 
-    public static Settings get() {
+    public static Constants get() {
         return obj;
     }
 
