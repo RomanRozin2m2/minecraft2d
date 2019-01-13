@@ -19,5 +19,5 @@ public class Settings {
     public float playerHeight = 1.75f;
     public float playerWidth = 0.8f;
 
-
+    public int ticksPerSecond = 20;
 }
