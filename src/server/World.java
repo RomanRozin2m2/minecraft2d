@@ -3,7 +3,6 @@ package server;
 import server.blocks.*;
 import server.entities.Player;
 
-import java.lang.management.PlatformLoggingMXBean;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -69,13 +68,17 @@ public class World {
                 world[x][y] = new Air();
             }
             world[x][currHeight] = new Grass();
-            for (int y = currHeight - 1; y >= 0; y--) {
+            int bedrockLevel = random.nextInt(3);
+            for (int y = currHeight - 1; y > bedrockLevel; y--) {
                 if (random.nextInt(world[0].length-y) < y){
                     world[x][y] = new Dirt();
                 }
                 else {
                     world[x][y] = new Stone();
                 }
+            }
+            for (int y = bedrockLevel; y >= 0; y--) {
+                world[x][y] = new Bedrock();
             }
         }
     }
