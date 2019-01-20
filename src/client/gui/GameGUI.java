@@ -13,7 +13,6 @@ public class GameGUI extends JFrame {
     Player player;
     Server server;
     KListener kl;
-    CTRListener ctrl;
 
     public GameGUI(Server serv) {
         server = serv;
@@ -40,9 +39,7 @@ public class GameGUI extends JFrame {
     private void initGUI() {
         field = new GameField(8, 8, server.getWorld());
         add(field);
-        ctrl = new CTRListener();
-        addKeyListener(ctrl);
-        kl = new KListener(player, ctrl);
+        kl = new KListener(player);
         addKeyListener(kl);
     }
 }
