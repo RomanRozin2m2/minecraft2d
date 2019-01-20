@@ -17,4 +17,5 @@ public class Settings {
     public int blockSize = 10;
     public int framesPerSecond = 25;
     public RenderMode renderMode = RenderMode.Textures;
+    public Keybinds keybinds = new Keybinds();
 }

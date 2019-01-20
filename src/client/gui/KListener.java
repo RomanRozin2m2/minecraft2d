@@ -1,17 +1,24 @@
 package client.gui;
 
+import client.Settings;
 import server.entities.Player;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.security.Key;
+import java.util.ArrayList;
 
 public class KListener implements KeyListener {
     Player player;
-    CTRListener control;
+    ArrayList<Integer> keysPressed;
+    Thread keyThread;
 
-    public KListener(Player pl, CTRListener ctrl){
+
+    public KListener(Player pl){
         player = pl;
-        control = ctrl;
+        keysPressed = new ArrayList<Integer>();
+        keyThread = new Thread(this::key);
+        keyThread.start();
     }
 
     @Override
@@ -21,24 +28,36 @@ public class KListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (control.isCTRLholded){
-            if (e.getKeyCode() == KeyEvent.VK_A) {
-                player.runLeft();
-            } else if (e.getKeyCode() == KeyEvent.VK_D) {
-                player.runRight();
-            }
-        }
-        else {
-            if (e.getKeyCode() == KeyEvent.VK_A) {
-                player.walkLeft();
-            } else if (e.getKeyCode() == KeyEvent.VK_D) {
-                player.walkRight();
-            }
+        if(!keysPressed.contains(e.getKeyCode())){
+            keysPressed.add(e.getKeyCode());
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        keysPressed.remove((Integer) e.getKeyCode());
+    }
 
+    private void key(){
+        while (true){
+            if (keysPressed.contains(Settings.get().keybinds.runKey) && keysPressed.contains(Settings.get().keybinds.leftKey)){
+                player.runLeft();
+            }
+            else if (keysPressed.contains(Settings.get().keybinds.runKey) && keysPressed.contains(Settings.get().keybinds.rightKey)){
+                player.runRight();
+            }
+            else if (!keysPressed.contains(Settings.get().keybinds.runKey) && keysPressed.contains(Settings.get().keybinds.leftKey)){
+                player.walkLeft();
+            }
+            else if (!keysPressed.contains(Settings.get().keybinds.runKey) && keysPressed.contains(Settings.get().keybinds.rightKey)){
+                player.walkRight();
+            }
+            try {
+                Thread.sleep(1000/Settings.get().framesPerSecond);
+            }
+            catch (InterruptedException e){
+
+            }
+        }
     }
 }
