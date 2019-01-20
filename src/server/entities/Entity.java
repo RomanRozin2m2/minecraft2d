@@ -1,6 +1,7 @@
 package server.entities;
 
 public abstract class Entity {
+    boolean isFloating;
     int health;
     float x;
     float y;

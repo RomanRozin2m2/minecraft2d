@@ -40,6 +40,7 @@ public class KListener implements KeyListener {
 
     private void key(){
         while (true){
+            System.out.println(keysPressed.toString());
             if (keysPressed.contains(Settings.get().keybinds.runKey) && keysPressed.contains(Settings.get().keybinds.leftKey)){
                 player.runLeft();
             }
@@ -52,7 +53,7 @@ public class KListener implements KeyListener {
             else if (!keysPressed.contains(Settings.get().keybinds.runKey) && keysPressed.contains(Settings.get().keybinds.rightKey)){
                 player.walkRight();
             }
-            else if (keysPressed.contains(Settings.get().keybinds.jumpKey)){
+            if (keysPressed.contains(Settings.get().keybinds.jumpKey)){
                 player.jump();
             }
             try {

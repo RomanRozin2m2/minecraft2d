@@ -59,7 +59,7 @@ public class Player extends Entity {
     }
 
     public void jump(){
-        if (ySpeed < maxYSpeed){
+        if (ySpeed < maxYSpeed && !isFloating){
             ySpeed += jumpAcceleration;
         }
     }
