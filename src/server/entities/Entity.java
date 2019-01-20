@@ -13,9 +13,10 @@ public abstract class Entity {
     static float maxLeftWalkSpeed = -0.1f;
     static float maxRightWalkSpeed = 0.1f;
     static float maxRightRunSpeed = 0.25f;
-    static float jumpAcceleration = 0.3f;
+    static float jumpAcceleration = 0.1f;
     static float runAcceleration = 0.025f;
     static float walkAcceleration = 0.01f;
+    static float maxYSpeed = 0.25f;
 
     public float getWidth() {
         return width;

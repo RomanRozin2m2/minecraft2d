@@ -52,6 +52,9 @@ public class KListener implements KeyListener {
             else if (!keysPressed.contains(Settings.get().keybinds.runKey) && keysPressed.contains(Settings.get().keybinds.rightKey)){
                 player.walkRight();
             }
+            else if (keysPressed.contains(Settings.get().keybinds.jumpKey)){
+                player.jump();
+            }
             try {
                 Thread.sleep(1000/Settings.get().framesPerSecond);
             }
