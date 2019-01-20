@@ -1,13 +1,11 @@
 package client.gui;
 
+import client.Settings;
 import server.Server;
-import server.Settings;
 import server.blocks.*;
 import server.entities.Player;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.KeyListener;
 
 public class GameGUI extends JFrame {
     Block[][] guiWorld;
@@ -29,7 +27,7 @@ public class GameGUI extends JFrame {
         new Thread(() -> {
             while (true) {
                 try {
-                    int sleepTime = 1000 / Settings.get().ticksPerSecond;
+                    int sleepTime = 1000 / Settings.get().framesPerSecond;
                     Thread.sleep(sleepTime);
                     repaint();
                 }
@@ -40,7 +38,7 @@ public class GameGUI extends JFrame {
     }
 
     private void initGUI() {
-        field = new GameField(8, 8, server.getWorld(), 10);
+        field = new GameField(8, 8, server.getWorld());
         add(field);
         ctrl = new CTRListener();
         addKeyListener(ctrl);
