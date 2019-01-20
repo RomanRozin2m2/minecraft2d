@@ -19,6 +19,11 @@ public class Grass extends Block {
     }
 
     @Override
+    public boolean isPassable() {
+        return false;
+    }
+
+    @Override
     public Image getTexture() {
         return texture;
     }
