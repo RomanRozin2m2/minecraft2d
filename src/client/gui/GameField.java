@@ -2,6 +2,7 @@ package client.gui;
 
 import client.Settings;
 import server.World;
+import server.blocks.Air;
 import server.blocks.Block;
 import server.entities.Player;
 
@@ -52,7 +53,6 @@ public class GameField extends JComponent {
     }
 
     private void showWorld(Graphics g){
-        guiWorld.getWorld()[(int)currpl.getX()][(int)currpl.getY()-1].isHighlight = true;
         int blockSize = Settings.get().blockSize;
         boolean useTextures = Settings.get().renderMode == RenderMode.Textures;
         for (int x = 0; x < guiWorld.getWorld().length; x++){
@@ -69,9 +69,10 @@ public class GameField extends JComponent {
                     g.setColor(block.getColor());
                     g.fillRect(topLeftX, topLeftY, blockSize, blockSize);
                 }
-                if (block.isHighlight){
+                if (block.isHighlight && !block.getId().equals(Air.id)){
                     g.setColor(new Color(0x7CC5C800, true));
                     g.fillRect(topLeftX, topLeftY, blockSize, blockSize);
+                    block.isHighlight = false;
                 }
             }
         }
