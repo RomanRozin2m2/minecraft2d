@@ -1,6 +1,7 @@
 package client.gui;
 
 import client.Settings;
+import server.Constants;
 import server.World;
 import server.blocks.Air;
 import server.blocks.Block;
@@ -27,14 +28,34 @@ public class GameField extends JComponent {
     }
 
     private void drawEyeLine(Graphics g){
-        g.setColor(Color.YELLOW);
         float ex = currpl.getX() + currpl.getEyeX();
         float ey = currpl.getY() + currpl.getEyeY();
         int fex = (int) (ex*Settings.get().blockSize);
-        int fey = (int) (ey*Settings.get().blockSize);
+        int fey = (int) (getHeight() - (ey*Settings.get().blockSize));
         int cursx = currpl.getCursorx();
         int cursy = currpl.getCursory();
-        g.drawLine(fex, getHeight() - fey, cursx, cursy);
+        int distanceY = cursy - fey;
+        int distanceX = cursx - fex;
+        int maxDistance = Constants.get().maxBreakDistance*Settings.get().blockSize;
+
+        float totalLength = (float) (Math.sqrt(distanceX * distanceX + distanceY * distanceY));
+        float neededLength = maxDistance;
+        float coefficient = neededLength / totalLength;
+
+        int actualX = (int) (distanceX * coefficient) + fex;
+        int actualY = (int) (distanceY * coefficient) + fey;
+
+        g.setColor(new Color(0xC5C800));
+        g.drawLine(fex, fey, actualX, actualY);
+
+        g.setColor(new Color(0xC5C800));
+        for (int segment = 0; segment < maxDistance; segment++){
+            if (segment > 0){
+                fex *= segment;
+                fey *= segment;
+            }
+            //g.drawLine(fex,fey,fex+1,fey+1);
+        }
     }
 
     private void drawPlayer(Graphics g) {
