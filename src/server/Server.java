@@ -28,98 +28,71 @@ public class Server {
     private void handlePlayersMovement() {
         for (Player player : world.getPlayers()) {
 
-
+            while (isGoingToCollide(player)) {
+                player.setxSpeed(player.getxSpeed() * 0.7f);
+                player.setySpeed(player.getySpeed() * 0.7f);
+            }
 
             float xSpeed = player.getxSpeed();
             float ySpeed = player.getySpeed();
 
             float leftX = player.getX();
-            float rightX = leftX + player.getWidth();
-
             float bottomY = player.getY();
-            float topY = bottomY + player.getHeight();
 
             float nextX = leftX + xSpeed;
             float nextY = bottomY + ySpeed;
 
-            player.setxSpeed(xSpeed * 0.9f);
-
-            if (player.getySpeed() < 0) {
-                player.setySpeed(ySpeed * 1.1f);
-            }
-            else if(player.getySpeed() > 0) {
-                player.setySpeed(ySpeed * 0.8f);
-            }
-
-            int coordsLeftX = (int) (nextX);
-            int coordsRightX = (int) (nextX + player.getWidth());
-
-            int coordsBottomY = (int) (nextY);
-            int coordsTopY = (int) (nextY + player.getHeight());
-
-            if (xSpeed > 0) {
-                for (int yCoord = coordsBottomY; yCoord <= coordsTopY; yCoord++) {
-                    Block block = world.getWorld()[coordsRightX][yCoord];
-                    if (!block.isPassable()) {
-                        nextX = coordsRightX - player.getWidth();
-                        player.setxSpeed(0);
-                        break;
-                    }
-                }
-            }
-            else if (xSpeed < 0) {
-                for (int yCoord = coordsBottomY; yCoord <= coordsTopY; yCoord++) {
-                    Block block = world.getWorld()[coordsLeftX][yCoord];
-                    if (!block.isPassable()) {
-                        nextX = coordsLeftX + 1;
-                        player.setxSpeed(0);
-                        break;
-                    }
-                }
-            }
-
-            if (ySpeed > 0) {
-                for (int xCoord = coordsLeftX; xCoord <= coordsRightX; xCoord++) {
-                    Block block = world.getWorld()[xCoord][coordsTopY];
-                    if (!block.isPassable()) {
-                        nextY = coordsTopY - player.getHeight();
-                        player.setySpeed(0);
-                        break;
-                    }
-                }
-            }
-            else if (ySpeed < 0) {
-                for (int xCoord = coordsLeftX; xCoord <= coordsRightX; xCoord++) {
-                    Block block = world.getWorld()[xCoord][coordsBottomY];
-                    if (!block.isPassable()) {
-                        nextY = coordsBottomY + 1;
-                        player.setySpeed(0);
-                        break;
-                    }
-                }
-            }
-
-            if (player.getySpeed() == 0) {
-                boolean canFall = true;
-                for (int xCoord = coordsLeftX; xCoord <= coordsRightX; xCoord++) {
-                    Block block = world.getWorld()[xCoord][coordsBottomY - 1];
-                    if (!block.isPassable()) {
-                        canFall = false;
-                        break;
-                    }
-                }
-                if (canFall) {
-                    player.setySpeed(-0.1f);
-                }
-            }
-
             player.setX(nextX);
             player.setY(nextY);
+
+            applyGravity(player);
 
         }
     }
 
     public World getWorld(){
         return world;
+    }
+
+    private boolean isGoingToCollide(Player player) {
+        float xSpeed = player.getxSpeed();
+        float ySpeed = player.getySpeed();
+
+        float leftX = player.getX();
+        float rightX = leftX + player.getWidth();
+
+        float bottomY = player.getY();
+        float topY = bottomY + player.getHeight();
+
+        float nextX = leftX + xSpeed;
+        float nextY = bottomY + ySpeed;
+
+        int coordsLeftX = (int) (nextX);
+        int coordsRightX = (int) (nextX + player.getWidth());
+
+        int coordsBottomY = (int) (nextY);
+        int coordsTopY = (int) (nextY + player.getHeight());
+
+        boolean isAvailablePoint = true;
+
+        for (int currX = coordsLeftX; currX <= coordsRightX; currX++) {
+            for (int currY = coordsBottomY; currY <= coordsTopY; currY++) {
+                if (!world.getWorld()[currX][currY].isPassable()) {
+                    isAvailablePoint = false;
+                }
+            }
+        }
+
+        return !isAvailablePoint;
+    }
+
+    private void applyGravity(Player player) {
+        float currYVelocity = player.getySpeed();
+
+        player.setySpeed(currYVelocity - 0.01f);
+
+        if (isGoingToCollide(player)) {
+            player.setySpeed(currYVelocity);
+        }
     }
 }

@@ -64,6 +64,9 @@ public abstract class Entity {
     }
 
     public void setySpeed(float ySpeed) {
+        if (Math.abs(ySpeed) < 0.0001) {
+            ySpeed = 0;
+        }
         this.ySpeed = ySpeed;
     }
 
@@ -72,6 +75,9 @@ public abstract class Entity {
     }
 
     public void setxSpeed(float xSpeed) {
+        if (Math.abs(xSpeed) < 0.0001) {
+            xSpeed = 0;
+        }
         this.xSpeed = xSpeed;
     }
 }
