@@ -10,16 +10,30 @@ import java.awt.*;
 
 public class GameField extends JComponent {
     World guiWorld;
+    Player currpl;
 
     public void paint(Graphics g){
         showWorld(g);
         drawPlayer(g);
+        drawEyeLine(g);
     }
 
-    public GameField(int lineWidth, int lineHeight, World world) {
+    public GameField(int lineWidth, int lineHeight, World world, Player player) {
         setSize(lineWidth,  lineHeight);
         guiWorld = world;
+        currpl = player;
         setVisible(true);
+    }
+
+    private void drawEyeLine(Graphics g){
+        g.setColor(Color.YELLOW);
+        float ex = currpl.getX() + currpl.getEyeX();
+        float ey = currpl.getY() + currpl.getEyeY();
+        int fex = (int) (ex*Settings.get().blockSize);
+        int fey = (int) (ey*Settings.get().blockSize);
+        int cursx = currpl.getCursorx();
+        int cursy = currpl.getCursory();
+        g.drawLine(fex, getHeight() - fey, cursx, cursy);
     }
 
     private void drawPlayer(Graphics g) {
@@ -38,6 +52,7 @@ public class GameField extends JComponent {
     }
 
     private void showWorld(Graphics g){
+        guiWorld.getWorld()[(int)currpl.getX()][(int)currpl.getY()-1].isHighlight = true;
         int blockSize = Settings.get().blockSize;
         boolean useTextures = Settings.get().renderMode == RenderMode.Textures;
         for (int x = 0; x < guiWorld.getWorld().length; x++){
@@ -52,6 +67,10 @@ public class GameField extends JComponent {
                 }
                 else {
                     g.setColor(block.getColor());
+                    g.fillRect(topLeftX, topLeftY, blockSize, blockSize);
+                }
+                if (block.isHighlight){
+                    g.setColor(new Color(0x7CC5C800, true));
                     g.fillRect(topLeftX, topLeftY, blockSize, blockSize);
                 }
             }

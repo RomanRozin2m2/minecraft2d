@@ -15,6 +15,8 @@ public class Constants {
     public int playerHealth = 20;
     public float playerHeight = 1.75f;
     public float playerWidth = 0.8f;
+    public float playerEyeY = 0.9f;
+    public float playerEyeX = 0.5f;
 
     public int ticksPerSecond = 20;
 }

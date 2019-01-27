@@ -40,7 +40,6 @@ public class KListener implements KeyListener {
 
     private void key(){
         while (true){
-            System.out.println(keysPressed.toString());
             if (keysPressed.contains(Settings.get().keybinds.runKey) && keysPressed.contains(Settings.get().keybinds.leftKey)){
                 player.runLeft();
             }

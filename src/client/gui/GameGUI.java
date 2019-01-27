@@ -13,6 +13,8 @@ public class GameGUI extends JFrame {
     Player player;
     Server server;
     KListener kl;
+    MListener ml;
+    MMListener mml;
 
     public GameGUI(Server serv) {
         server = serv;
@@ -37,10 +39,18 @@ public class GameGUI extends JFrame {
     }
 
     private void initGUI() {
-        field = new GameField(8, 8, server.getWorld());
+        field = new GameField(8, 8, server.getWorld(), player);
         add(field);
         kl = new KListener(player);
         addKeyListener(kl);
+        ml = new MListener(this);
+        addMouseListener(ml);
+        mml = new MMListener(this, player);
+        addMouseMotionListener(mml);
+    }
+
+    public void blockBreak(int x,int y){
+        field.guiWorld.getWorld()[x][y] = new Air();
     }
 }
 

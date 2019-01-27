@@ -3,6 +3,8 @@ package server.entities;
 import server.Constants;
 
 public class Player extends Entity {
+    private int cursorx;
+    private int cursory;
 
     public Player(float spawnx, float spawny){
         x = spawnx;
@@ -12,6 +14,30 @@ public class Player extends Entity {
         health = Constants.get().playerHealth;
         height = Constants.get().playerHeight;
         width = Constants.get().playerWidth;
+    }
+
+    public int getCursorx() {
+        return cursorx;
+    }
+
+    public void setCursorx(int cursorx) {
+        this.cursorx = cursorx;
+    }
+
+    public int getCursory() {
+        return cursory;
+    }
+
+    public void setCursory(int cursory) {
+        this.cursory = cursory;
+    }
+
+    public float getEyeY(){
+        return Constants.get().playerHeight * Constants.get().playerEyeY;
+    }
+
+    public float getEyeX(){
+        return Constants.get().playerWidth * Constants.get().playerEyeX;
     }
 
     public void walkRight(){

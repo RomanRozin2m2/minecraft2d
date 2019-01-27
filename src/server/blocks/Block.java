@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public abstract class Block {
 
+    public boolean isHighlight;
     public final static Color noColor = new Color(0xCC60D7);
     public final static Image invalid = getTextureImage("data/textures/invalid.png");
 
